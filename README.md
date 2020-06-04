@@ -145,10 +145,17 @@ b.3 The form must be OWASP compliant
    Example:
 
    Company 1 (4 employees)
+   
    Company 2 (35 employees)
+   
    Company 3 (10 employees)
+   
 ----------------------------------------------------------------------------------------------------------
+
    Employee 1 (2 companies)
+   
    Employee 2 (1 company)
+   
    Employee 3 (4 companies)
+   
    Employee 4 (5 companies)
