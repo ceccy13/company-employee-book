@@ -27,6 +27,54 @@ Company-Employee-Book Project
 
 ./company-employee-book-master/app/Converter.php
 
+./company-employee-book-master/app/DataSplitOnPage.php
+
+./company-employee-book-master/app/Employee.php
+
+-- Views/includes --
+
+./company-employee-book-master/resources/views/includes/footer.php
+
+./company-employee-book-master/resources/views/includes/header.php
+
+-- Views --
+
+./company-employee-book-master/resources/views/company/create.php
+
+./company-employee-book-master/resources/views/company/edit.php
+
+./company-employee-book-master/resources/views/company/index.php
+
+./company-employee-book-master/resources/views/company/show.php
+
+./company-employee-book-master/resources/views/employee/create.php
+
+./company-employee-book-master/resources/views/employee/edit.php
+
+./company-employee-book-master/resources/views/employee/index.php
+
+./company-employee-book-master/resources/views/employee/show.php
+
+./company-employee-book-master/resources/views/home.php
+
+./company-employee-book-master/resources/views/welcome.php
+
+-- Route --
+
+./company-employee-book-master/web.php
+
+-- JavaScript --
+
+./js/mc.js
+
+-- CSS --
+
+./css/mc.css
+
+-- Database File Settings --
+
+./company-employee-book-master/.env
+
   PROJECT REQUIREMENTS
    
 1. Create a MySql database containing the following information about companies and employees.
@@ -104,51 +152,3 @@ b.3 The form must be OWASP compliant
    Employee 2 (1 company)
    Employee 3 (4 companies)
    Employee 4 (5 companies)
-
-./company-employee-book-master/app/DataSplitOnPage.php
-
-./company-employee-book-master/app/Employee.php
-
--- Views/includes --
-
-./company-employee-book-master/resources/views/includes/footer.php
-
-./company-employee-book-master/resources/views/includes/header.php
-
--- Views --
-
-./company-employee-book-master/resources/views/company/create.php
-
-./company-employee-book-master/resources/views/company/edit.php
-
-./company-employee-book-master/resources/views/company/index.php
-
-./company-employee-book-master/resources/views/company/show.php
-
-./company-employee-book-master/resources/views/employee/create.php
-
-./company-employee-book-master/resources/views/employee/edit.php
-
-./company-employee-book-master/resources/views/employee/index.php
-
-./company-employee-book-master/resources/views/employee/show.php
-
-./company-employee-book-master/resources/views/home.php
-
-./company-employee-book-master/resources/views/welcome.php
-
--- Route --
-
-./company-employee-book-master/web.php
-
--- JavaScript --
-
-./js/mc.js
-
--- CSS --
-
-./css/mc.css
-
--- Database File Settings --
-
-./company-employee-book-master/.env
