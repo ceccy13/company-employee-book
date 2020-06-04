@@ -75,6 +75,8 @@ Company-Employee-Book Project
 
 ./company-employee-book-master/.env
 
+
+
   PROJECT REQUIREMENTS
    
 1. Create a MySql database containing the following information about companies and employees.
@@ -82,31 +84,47 @@ Company-Employee-Book Project
    The company consist of the following details:
 
    Name
+   
    Description
+   
    VAT number
+   
    Email
+   
    Country
+   
    State
+   
    City
+   
    Address
+   
    Date Created
+   
    All of the employees
 
    Employee consist of the following details:
    
    Name
+   
    Surname
+   
    Email
+   
    Age
+   
    Gender
+   
    Working Experience (how many years)
 
    All of the companies the person is working in
+   
    Note that each company may have many employees and each employee may work in many companies.
 
 2. For this structure to be implemented a web form is needed with all of the “CRUD” operations.
 
    For each company it should be possible to add indefinite amount of employees.
+   
    For each employee it should be possible to add indefinite amount of companies.
    
    With following requirements:
@@ -118,14 +136,21 @@ a.  Date field, Email and VAT number must be validated using regular expressions
 b.  Valid VAT formats are (Examples: “AAB1234-W1”  “ACC12345X0”):
 
 1)  Starts with two uppercase alphanumerics,
+
     followed by B and 4 digits, a special
+    
     symbol, another uppercase alphanumeric
+    
     and an optional trailing digit which can
+    
     be 0,1 or 2. The special symbol can be anything except “\” or “/“.
 	
 2)  Starts with three uppercase alphanumerics,
+
     followed by 5 digits, another
+    
     uppercase alphanumeric
+    
     and an optional trailing digit which can be 0,1 or 2.
    
 b.3 The form must be OWASP compliant
@@ -133,13 +158,17 @@ b.3 The form must be OWASP compliant
 3. Create a separate page with search options.
 
    There should be one input field where you can enter name of company or name of employee.
+   
    The search should retrieve and display all of the companies matching the input string and all of the
+   
    employees based on name or surname.
    
    The result should list all of the companies and all of the employees.
    
    For each company you need to display company name + number of employees in it.
+   
    For each employee you need to display first and last name + number of companies he/she is
+   
    working in.
    
    Example:
