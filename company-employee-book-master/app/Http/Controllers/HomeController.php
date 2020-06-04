@@ -13,6 +13,12 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+		try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            die("Could not connect to the database! <br><br> Check settings and if DB is imported successfully! ");
+        }
+		
         $match = $request->input('search');
 
         $companies_selected_page = $request->get('companiesPage');
