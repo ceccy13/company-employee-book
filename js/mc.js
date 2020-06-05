@@ -83,11 +83,12 @@ $(document).ready(function() {
     $('button[name="btn_ajax_show"]').click(function(){
         var id = $(this).parent().find('input').val();
         var page = null;
+        var protocol = window.location.protocol;
+        var host = window.location.host;
         var currentLocationPathName = window.location.pathname;
-        //var route = currentLocationPathName.split("/").pop();
         $.ajax({
             //url: "http://localhost/company-employee-book/public/" + route + "/" + id,
-            url: "http://localhost" + currentLocationPathName + "/" + id,
+            url: protocol + "//" + host + currentLocationPathName + "/" + id,
             type: 'get',
             dataType: 'text',
             success: function( _response ){
