@@ -76,7 +76,7 @@ include(app_path().'/../resources/views/includes/header.php');
                             foreach($gender_array as $gender){
                                 $selected = '';
                                 if(old('gender') == $gender) $selected = 'selected';
-                                echo '<option value="'.$gender.'" '.$selected.'>'.$gender.' years old</option>';
+                                echo '<option value="'.$gender.'" '.$selected.'>'.$gender.'</option>';
                                 $age++;
                             }
                             ?>
