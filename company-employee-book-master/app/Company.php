@@ -64,7 +64,7 @@ class Company
         return DB::table('companies')
             ->leftJoin('companies_employees', 'companies.id', '=', 'companies_employees.company_id')
             ->leftJoin('employees', 'companies_employees.employee_id', '=', 'employees.id')
-            ->select('companies.id','employees.id', 'employees.name')
+            ->select('companies.id','employees.id', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'))
             ->where('companies.id', '=', $company_id)
             ->orderBy('companies.created_at', 'desc')
             ->get();
