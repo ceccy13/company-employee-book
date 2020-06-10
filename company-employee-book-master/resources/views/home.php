@@ -72,7 +72,7 @@ include(app_path().'/../resources/views/includes/header.php');
             echo'
                     <tr>
                         <td scope="row">'.($employee_row + 1).'</td>
-                        <td>'.$employee['name'].'</td>
+                        <td>'.$employee['names'].'</td>
                         <td>'.$employee['companies_count'].'</td>
                     </tr>';
         }
