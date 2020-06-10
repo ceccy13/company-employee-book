@@ -72,7 +72,7 @@ class Company
 
     public function getListEmployeesNotOfCompany($employees_of_company_ids_array){
         return DB::table('employees')
-            ->select('id', 'name')
+            ->select('id', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'))
             ->whereNotIn('id', $employees_of_company_ids_array)
             ->get();
     }

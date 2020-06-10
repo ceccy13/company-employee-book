@@ -47,7 +47,7 @@ class Employee
 
         return DB::table('employees')
             ->leftJoin('companies_employees', 'employees.id', '=', 'companies_employees.employee_id')
-            ->select('employees.id', 'employees.name', DB::raw('count(companies_employees.company_id) as companies_count'))
+            ->select('employees.id', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'), DB::raw('count(companies_employees.company_id) as companies_count'))
             ->groupBy('employees.name')
             ->where('name', 'like', '%'.$match.'%')
             ->orderBy('employees.created_at', 'desc')
