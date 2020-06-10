@@ -75,7 +75,7 @@ class Employee
 
     public function getNames(){
         return DB::table('employees')
-                ->select('id', 'name')
+                ->select('id', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'))
                 ->orderBy('name', 'asc')
                 ->get();
     }
