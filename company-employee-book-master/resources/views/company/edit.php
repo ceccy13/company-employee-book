@@ -24,7 +24,7 @@ include(app_path().'/../resources/views/includes/header.php');
                                 <select name="employees_to_remove[]" multiple class="form-control mc-textarea-size">
                                     <?php
                                     foreach($employees_of_company as $employee){
-                                        echo '<option value="'.$employee['id'].'">'.$employee['name'].'</option>';
+                                        echo '<option value="'.$employee['id'].'">'.$employee['names'].'</option>';
                                     }
                                     ?>
                                 </select>
@@ -55,7 +55,7 @@ include(app_path().'/../resources/views/includes/header.php');
                                 <select name="employees_to_add[]" multiple class="form-control mc-textarea-size" id="">
                                     <?php
                                     foreach($employees_not_of_company as $employee){
-                                        echo '<option value="'.$employee['id'].'">'.$employee['name'].'</option>';
+                                        echo '<option value="'.$employee['id'].'">'.$employee['names'].'</option>';
                                     }
                                     ?>
                                 </select>
