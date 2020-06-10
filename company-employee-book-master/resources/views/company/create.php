@@ -117,7 +117,7 @@ include(app_path().'/../resources/views/includes/header.php');
                         <select name="employees[]" multiple class="form-control mc-textarea-size" id="employees">
                             <?php
                             foreach($employees as $employee){
-                                echo '<option value="'.$employee['id'].'">'.$employee['name'].'</option>';
+                                echo '<option value="'.$employee['id'].'">'.$employee['names'].'</option>';
                             }
                             ?>
                         </select>
