@@ -13,7 +13,8 @@ class DataSplitOnPage
     private $selected_page = 1;
     private $selected_page_interval = array();
 
-    public function __construct($table, $results_per_page, $selected_page, $match){
+    public function __construct($table, $results_per_page, $selected_page, $match)
+    {
         $this->results_per_page = $results_per_page;
         $this->set($table, $results_per_page, $match);
 
@@ -21,7 +22,8 @@ class DataSplitOnPage
         $this->setSelectedPageInterval($this->selected_page);
     }
 
-    public function set($table, $results_per_page, $match = null){
+    public function set($table, $results_per_page, $match = null)
+    {
         $total_records = $this->countTableRecords($table, $match);
         $total_pages = ceil($total_records / $results_per_page);
         $addendTo = $total_records % $results_per_page;
@@ -38,22 +40,26 @@ class DataSplitOnPage
         }
     }
 
-    public function get(){
+    public function get()
+    {
         return $this->pages;
     }
 
-    public function setSelectedPageInterval($selected_page){
+    public function setSelectedPageInterval($selected_page)
+    {
         $from = $selected_page * $this->results_per_page - $this->results_per_page + 1;
         $to = $selected_page * $this->results_per_page;
         $this->selected_page_interval['from'] = $from;
         $this->selected_page_interval['to'] = $to;
     }
 
-    public function getSelectedPageInterval(){
+    public function getSelectedPageInterval()
+    {
         return $this->selected_page_interval;
     }
 
-    public function countTableRecords($table, $match){
+    public function countTableRecords($table, $match)
+    {
         if(Schema::hasTable($table)){
             return DB::table($table)
                 ->where('name', 'like', '%'.$match.'%')
@@ -63,7 +69,6 @@ class DataSplitOnPage
             echo 'Table does not exist!';
             return;
         }
-
     }
 
 }

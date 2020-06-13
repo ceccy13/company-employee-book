@@ -13,7 +13,8 @@ use App\Rules\ValidatorDate;
 
 class Employee
 {
-    public function normalize($request){
+    public function normalize($request)
+    {
         foreach($request as $field => $value){
             if( $field != 'name' && $field != 'surname') continue;
             $value = trim($value);
@@ -30,7 +31,8 @@ class Employee
         return $request;
     }
 
-    public function validate($request, $id = null){
+    public function validate($request, $id = null)
+    {
         $unique = Rule::unique('employees')->ignore($id);
         return Validator::make($request, [
             'name' => 'bail|required|string|min:2|max:50',
@@ -42,7 +44,8 @@ class Employee
         ]);
     }
 
-    public function getList($match = null, $pageFrom = null, $pageTo = null){
+    public function getList($match = null, $pageFrom = null, $pageTo = null)
+    {
         if($pageFrom != null) $pageFrom = $pageFrom -1;
 
         return DB::table('employees')
@@ -56,7 +59,8 @@ class Employee
             ->take($pageTo);
     }
 
-    public function getListCompaniesOfEmployee($employee_id){
+    public function getListCompaniesOfEmployee($employee_id)
+    {
         return DB::table('employees')
             ->leftJoin('companies_employees', 'employees.id', '=', 'companies_employees.employee_id')
             ->leftJoin('companies', 'companies_employees.company_id', '=', 'companies.id')
@@ -66,28 +70,32 @@ class Employee
             ->get();
     }
 
-    public function getListCompaniesNotOfEmployee($companies_of_employee_ids_array){
+    public function getListCompaniesNotOfEmployee($companies_of_employee_ids_array)
+    {
         return DB::table('companies')
             ->select('id', 'name')
             ->whereNotIn('id', $companies_of_employee_ids_array)
             ->get();
     }
 
-    public function getNames(){
+    public function getNames()
+    {
         return DB::table('employees')
                 ->select('id', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'))
                 ->orderBy('name', 'asc')
                 ->get();
     }
 
-    public function getRecord($id){
+    public function getRecord($id)
+    {
         return DB::table('employees')
             ->select('*')
             ->where('id',$id)
             ->get();
     }
 
-    public function add($request){
+    public function add($request)
+    {
         return DB::table('employees')->insertGetId([
             'created_at' => now(),
             'name' => $request['name'],
@@ -99,7 +107,8 @@ class Employee
         ]);
     }
 
-    public function edit($request, $id){
+    public function edit($request, $id)
+    {
         return DB::table('employees')
             ->where('id', $id)
             ->update([
@@ -113,7 +122,8 @@ class Employee
             ]);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         DB::table('employees')->where('id',$id)->delete();
         DB::table('companies_employees')->where('employee_id',$id)->delete();
     }
