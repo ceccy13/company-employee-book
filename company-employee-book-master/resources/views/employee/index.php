@@ -63,8 +63,8 @@ include(app_path().'/../resources/views/includes/header.php');
     <div class="mc-pages">
         <?php
         foreach($employees_pages as $page => $records) {
-            $parameters1['companiesPage'] = $page;
-            $parameters1['employeesPage'] = Request::get('employeesPage');
+            $parameters1['companiesPage'] = Request::get('employeesPage');;
+            $parameters1['employeesPage'] = $page;
             echo '
                     <span><a name="companies_page_'.$page.'" href="'.action('EmployeeController@index', $parameters1).'">'.$records['start'].'-'.$records['end'].'</a></span>
                     <span>&#124;</span>';
