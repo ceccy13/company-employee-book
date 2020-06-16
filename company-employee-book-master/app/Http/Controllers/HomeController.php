@@ -24,7 +24,7 @@ class HomeController extends Controller
         $companies_selected_page = $request->get('companiesPage');
         $employees_selected_page = $request->get('employeesPage');
 
-        $companiesSplitPages = new DataSplitOnPage('companies', $results_per_page = 5, $companies_selected_page, $match);
+        $companiesSplitPages = new DataSplitOnPage('companies', $results_per_page = 2, $companies_selected_page, $match);
         $companies_pages = $companiesSplitPages->get();
         $companiesSelectedPage = $companiesSplitPages->getSelectedPageInterval();
 
