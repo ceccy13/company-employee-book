@@ -26,7 +26,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        $employees_selected_page = $request->get('companiesPage');
+        $employees_selected_page = $request->get('employeesPage');
 
         $employeesSplitPages = new DataSplitOnPage('employees', $results_per_page = 2, $employees_selected_page, $match = null);
         $employees_pages = $employeesSplitPages->get();

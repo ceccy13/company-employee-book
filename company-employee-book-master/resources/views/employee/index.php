@@ -28,9 +28,9 @@ include(app_path().'/../resources/views/includes/header.php');
         </thead>
         <tbody>
         <?php
-			$row = 0;
-            $page = Request::get('employeesPage');
-            $page == null || $page == 1 ? $add_num_page_to_row = 0 : $add_num_page_to_row = $page;
+		$row = 0;
+		$page = Request::get('employeesPage');
+		$page == null || $page == 1 ? $add_num_page_to_row = 0 : $add_num_page_to_row = $page;
         foreach($employees as $key => $employee){
 			$row++;
             echo'
