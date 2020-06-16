@@ -64,7 +64,7 @@ include(app_path().'/../resources/views/includes/header.php');
         <?php
             foreach($companies_pages as $page => $records) {
                 $parameters1['companiesPage'] = $page;
-                $parameters1['employeesPage'] = Request::get('employeesPage');
+                //$parameters1['employeesPage'] = Request::get('employeesPage');
                 echo '
                     <span><a name="companies_page_'.$page.'" href="'.action('CompanyController@index', $parameters1).'">'.$records['start'].'-'.$records['end'].'</a></span>
                     <span>&#124;</span>';
