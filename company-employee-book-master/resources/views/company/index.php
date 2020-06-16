@@ -28,10 +28,14 @@ include(app_path().'/../resources/views/includes/header.php');
     </thead>
     <tbody>
     <?php
-        foreach($companies as $row => $company){
+		$row = 0;
+		$page = Request::get('companiesPage');
+		$page == null || $page == 1 ? $add_num_page_to_row = 0 : $add_num_page_to_row = $page;
+        foreach($companies as $key => $company){
+			$row++;
             echo'
                 <tr>
-                    <td scope="row">'.($row + 1).'</td>
+                    <td scope="row">'.($row + $add_num_page_to_row).'</td>
                     <td>'.$company['name'].'</td>
                     <td>'.$company['employees_count'].'</td>
                         <!-- Trigger the modal with a button -->

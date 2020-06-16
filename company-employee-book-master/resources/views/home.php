@@ -26,10 +26,14 @@ include(app_path().'/../resources/views/includes/header.php');
         </thead>
         <tbody>
         <?php
-        foreach($companies as $company_row => $company){
+		$row = 0;
+		$page = Request::get('companiesPage');
+		$page == null || $page == 1 ? $add_num_page_to_row = 0 : $add_num_page_to_row = $page;
+        foreach($companies as $key => $company){
+			$row++;
             echo'
             <tr>
-            <td scope="row">'.($company_row + 1).'</td>
+            <td scope="row">'.($row + $add_num_page_to_row).'</td>
             <td>'.$company['name'].'</td>
             <td>'.$company['employees_count'].'</td>
             </tr>';
@@ -68,10 +72,14 @@ include(app_path().'/../resources/views/includes/header.php');
         </thead>
         <tbody>
         <?php
-        foreach($employees as $employee_row => $employee){
+		$row = 0;
+		$page = Request::get('employeesPage');
+		$page == null || $page == 1 ? $add_num_page_to_row = 0 : $add_num_page_to_row = $page;
+        foreach($employees as $key => $employee){
+			$row++;
             echo'
                     <tr>
-                        <td scope="row">'.($employee_row + 1).'</td>
+                        <td scope="row">'.($row + $add_num_page_to_row).'</td>
                         <td>'.$employee['names'].'</td>
                         <td>'.$employee['companies_count'].'</td>
                     </tr>';
