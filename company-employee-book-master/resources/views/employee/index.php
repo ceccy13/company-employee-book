@@ -35,7 +35,7 @@ include(app_path().'/../resources/views/includes/header.php');
 			$row++;
             echo'
                 <tr>
-                    <td scope="row">'.($row + $add_num_page_to_row).'</td>
+                    <td scope="row">'.($row + $add_num_page_to_row ).'</td>
                     <td>'.$employee['names'].'</td>
                     <td>'.$employee['companies_count'].'</td>
                         <!-- Trigger the modal with a button -->
@@ -66,7 +66,7 @@ include(app_path().'/../resources/views/includes/header.php');
             //$parameters1['companiesPage'] = Request::get('employeesPage');;
             $parameters1['employeesPage'] = $page;
             echo '
-                    <span><a name="companies_page_'.$page.'" href="'.action('EmployeeController@index', $parameters1).'">'.$records['start'].'-'.$records['end'].'</a></span>
+                    <span><a name="employees_page_'.$page.'" href="'.action('EmployeeController@index', $parameters1).'">'.$records['start'].'-'.$records['end'].'</a></span>
                     <span>&#124;</span>';
         }
         ?>

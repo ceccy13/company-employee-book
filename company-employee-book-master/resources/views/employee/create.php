@@ -88,14 +88,14 @@ include(app_path().'/../resources/views/includes/header.php');
                 </div>
                 <div class="form-group col-md-6">
                     <div class="form-group">
-                        <label for="working_experience">Working Experience</label>
+                        <label for="working_experience">Working Experience</label>					
                         <select name="working_experience" class="custom-select" size="1">
                             <option value="">Choose</option>
                             <?php
                             $working_experience = 0;
                             while($working_experience < 53){
                                 $selected = '';
-                                if(old('working_experience') === $working_experience) $selected = 'selected';
+                                if(old('working_experience') != null && old('working_experience') == $working_experience) $selected = 'selected';
                                 echo '<option value="'.$working_experience.'" '.$selected.'>'.$working_experience.' years</option>';
                                 $working_experience++;
                             }
@@ -115,10 +115,20 @@ include(app_path().'/../resources/views/includes/header.php');
                 <div class="form-group col-md-6">
                     <div class="form-group">
                         <label for="companies">Companies List</label>
+						<?php
+						echo 'testsssssssssssss';
+						//echo print_r(old('companies[]'), true); 
+						echo print_r(old('companies'), true); 
+						?>
                         <select name="companies[]" multiple class="form-control mc-textarea-size" id="companies">
                             <?php
                             foreach($companies as $company){
-                                echo '<option value="'.$company['id'].'">'.$company['name'].'</option>';
+								$selected = '';
+								old('companies') == null ? $arr_old_records = [] : $arr_old_records = old('companies');
+								if(in_array($company['id'], $arr_old_records)){
+									$selected = 'selected';
+								}
+                                echo '<option value="'.$company['id'].'" '.$selected.'>'.$company['name'].'</option>';
                             }
                             ?>
                         </select>

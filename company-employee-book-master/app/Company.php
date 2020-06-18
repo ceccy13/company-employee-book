@@ -50,12 +50,10 @@ class Company
 
     public function getList($match = null, $pageFrom = null, $pageTo = null)
     {
-        if($pageFrom != null) $pageFrom = $pageFrom -1;
-
         return DB::table('companies')
             ->leftJoin('companies_employees', 'companies.id', '=', 'companies_employees.company_id')
-            ->select('companies.id', 'companies.name', DB::raw('count(companies_employees.employee_id) as employees_count'))
-            ->groupBy('companies.name')
+            ->select('companies.id', 'companies.created_at', 'companies.name', DB::raw('count(companies_employees.employee_id) as employees_count'))
+            ->groupBy('companies.id')
             ->where('name', 'like', '%'.$match.'%')
             ->orderBy('companies.created_at', 'desc')
             ->get()

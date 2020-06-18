@@ -45,16 +45,14 @@ class Employee
     }
 
     public function getList($match = null, $pageFrom = null, $pageTo = null)
-    {
-        if($pageFrom != null) $pageFrom = $pageFrom -1;
-
+    {    
         return DB::table('employees')
             ->leftJoin('companies_employees', 'employees.id', '=', 'companies_employees.employee_id')
-            ->select('employees.id', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'), DB::raw('count(companies_employees.company_id) as companies_count'))
-            ->groupBy('employees.name')
-            ->where('name', 'like', '%'.$match.'%')
+            ->select('employees.id', 'employees.created_at', DB::raw('CONCAT(employees.name, " ",employees.surname) as names'), DB::raw('count(companies_employees.company_id) as companies_count'))           
+			->groupBy('employees.id')
+			->where('employees.name', 'like', '%'.$match.'%')
             ->orderBy('employees.created_at', 'desc')
-            ->get()
+           	->get()
             ->skip($pageFrom)
             ->take($pageTo);
     }
