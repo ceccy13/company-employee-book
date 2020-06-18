@@ -38,7 +38,7 @@ class EmployeeController extends Controller
         $employees = Converter::convertObjToArr($employees);
 
         return view('employee.index',array('employees' => $employees))
-					->with('employees_pages', $employees_pages)->with('results_per_page', $results_per_page);;
+					->with('employees_pages', $employees_pages)->with('results_per_page', $results_per_page);
     }
 
     /**
