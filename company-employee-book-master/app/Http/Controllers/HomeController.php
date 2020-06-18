@@ -25,12 +25,14 @@ class HomeController extends Controller
         $employees_selected_page = $request->get('employeesPage');
 
         $companiesSplitPages = new DataSplitOnPage('companies', $results_per_page = 2, $companies_selected_page, $match);
-        $companies_pages = $companiesSplitPages->get();
-        $companiesSelectedPage = $companiesSplitPages->getSelectedPageInterval();
+		$companies_results_per_page = $companiesSplitPages->getResultPerPage();
+        $companiesSelectedPage = $companiesSplitPages->getSelectedPageInterval();		
+		$companies_pages = $companiesSplitPages->get();
 
         $employeesSplitPages = new DataSplitOnPage('employees', $results_per_page = 2, $employees_selected_page, $match);
-        $employees_pages = $employeesSplitPages->get();
-        $employeesSelectedPage = $employeesSplitPages->getSelectedPageInterval();
+		$employees_results_per_page = $employeesSplitPages->getResultPerPage();
+        $employeesSelectedPage = $employeesSplitPages->getSelectedPageInterval();	
+		$employees_pages = $employeesSplitPages->get();
 
         $company = new Company();
         $companies = $company->getList($match, $companiesSelectedPage['from'], $companiesSelectedPage['to']);
@@ -39,8 +41,13 @@ class HomeController extends Controller
         $employee = new Employee();
         $employees = $employee->getList($match, $employeesSelectedPage['from'], $employeesSelectedPage['to']);
         $employees = Converter::convertObjToArr($employees);
+//echo '<pre>';
+//echo print_r($employees_pages, true);
+//echo '<pre>';
 
-        return view('home', array('$match' => $match, 'companies' => $companies, 'employees' => $employees))->with('companies_pages', $companies_pages)->with('employees_pages', $employees_pages);
+        return view('home', array('$match' => $match, 'companies' => $companies, 'employees' => $employees))
+				->with('companies_pages', $companies_pages)->with('companies_results_per_page', $companies_results_per_page)
+				->with('employees_pages', $employees_pages)->with('employees_results_per_page', $employees_results_per_page);
     }
 
 }

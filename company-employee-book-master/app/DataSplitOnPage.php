@@ -10,9 +10,11 @@ class DataSplitOnPage
 {
     private $pages = array();
     private $selected_page_interval = array();
+	private $results_per_page = null;
 
     public function __construct($table, $results_per_page, $selected_page, $match)
     {
+		$this->setResultPerPage($results_per_page);
 		if(empty($selected_page)) $selected_page = 1;
         $this->set($table, $results_per_page, $match);      
         $this->setSelectedPageInterval($results_per_page, $selected_page);
@@ -66,5 +68,13 @@ class DataSplitOnPage
             echo 'Table does not exist!';
         }
     }
+	
+	public function setResultPerPage($data){
+		$this->results_per_page = $data;
+	}
+
+	public function getResultPerPage(){
+		return $this->results_per_page;
+	}
 
 }

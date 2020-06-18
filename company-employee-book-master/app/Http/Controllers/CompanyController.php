@@ -31,12 +31,14 @@ class CompanyController extends Controller
         $companiesSplitPages = new DataSplitOnPage('companies', $results_per_page = 2, $companies_selected_page, $match = null);
         $companies_pages = $companiesSplitPages->get();
         $companiesSelectedPageInterval = $companiesSplitPages->getSelectedPageInterval();
+		$results_per_page = $companiesSplitPages->getResultPerPage();		
 
         $company = new Company();
         $companies = $company->getList($words = null, $companiesSelectedPageInterval['from'], $companiesSelectedPageInterval['to']);
         $companies = Converter::convertObjToArr($companies);
 
-        return view('company.index',array('companies' => $companies))->with('companies_pages', $companies_pages);
+        return view('company.index',array('companies' => $companies))
+					->with('companies_pages', $companies_pages)->with('results_per_page', $results_per_page);
     }
 
     /**

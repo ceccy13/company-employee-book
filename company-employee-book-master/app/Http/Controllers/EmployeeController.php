@@ -30,13 +30,15 @@ class EmployeeController extends Controller
 
         $employeesSplitPages = new DataSplitOnPage('employees', $results_per_page = 2, $employees_selected_page, $match = null);
         $employees_pages = $employeesSplitPages->get();
-        $employeesSelectedPageInterval = $employeesSplitPages->getSelectedPageInterval();
+        $employeesSelectedPageInterval = $employeesSplitPages->getSelectedPageInterval();		
+		$results_per_page = $employeesSplitPages->getResultPerPage();		
 
         $employee = new Employee();
         $employees = $employee->getList($words = null, $employeesSelectedPageInterval['from'], $employeesSelectedPageInterval['to']);
         $employees = Converter::convertObjToArr($employees);
 
-        return view('employee.index',array('employees' => $employees))->with('employees_pages', $employees_pages);
+        return view('employee.index',array('employees' => $employees))
+					->with('employees_pages', $employees_pages)->with('results_per_page', $results_per_page);;
     }
 
     /**

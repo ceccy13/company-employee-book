@@ -30,12 +30,12 @@ include(app_path().'/../resources/views/includes/header.php');
         <?php
 		$row = 0;
 		$page = Request::get('employeesPage');
-		$page == null || $page == 1 ? $add_num_page_to_row = 0 : $add_num_page_to_row = $page;
+		if(empty($page) || $page == 0) $page = 1;
         foreach($employees as $key => $employee){
 			$row++;
             echo'
                 <tr>
-                    <td scope="row">'.($row + $add_num_page_to_row ).'</td>
+                    <td scope="row">'.($row + $page * $results_per_page - $results_per_page).'</td>
                     <td>'.$employee['names'].'</td>
                     <td>'.$employee['companies_count'].'</td>
                         <!-- Trigger the modal with a button -->
