@@ -30,7 +30,7 @@ include(app_path().'/../resources/views/includes/header.php');
     <?php
 		$row = 0;
 		$page = Request::get('companiesPage');
-		if($page == 0) $page = 1;
+		if(empty($page) || $page == 0) $page = 1;
         foreach($companies as $key => $company){
 			$row++;
             echo'
