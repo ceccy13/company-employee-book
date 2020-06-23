@@ -89,8 +89,8 @@
             </ul>
                 <form id="search" method="get" class="form-inline my-2 my-md-0 mc-hidden-form">
                     <input disabled name="_token" type="hidden" value="<?= csrf_token(); ?>">
-                    <input type="hidden" name="companiesPage" class="form-control mr-sm-2" placeholder="" aria-label="" value="<?= Request::get('companiesPage') ?: 1; ?>">
-                    <input type="hidden" name="employeesPage" class="form-control mr-sm-2" placeholder="" aria-label="" value="<?= Request::get('employeesPage') ?: 1; ?>">
+                    <input type="hidden" name="companiesPage" class="form-control mr-sm-2" placeholder="" aria-label="" value="1">
+                    <input type="hidden" name="employeesPage" class="form-control mr-sm-2" placeholder="" aria-label="" value="1">
                     <input type="search" name="search" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" value="<?= Request::get('search'); ?>">
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
