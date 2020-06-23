@@ -28,7 +28,7 @@ class CompanyController extends Controller
     {
         $companies_page_selected = $request->get('companiesPage');
 
-        $records_total = Company::getListCount();
+        $records_total = Company::getListCount($match = null);
         $companiesPageSplitter = new PageSplitter($records_total, $companies_records_per_page = 2, $companies_page_selected, $match = null);
 
         $companies_pages = $companiesPageSplitter->getPages();

@@ -28,7 +28,7 @@ class EmployeeController extends Controller
     {
         $employees_page_selected = $request->get('employeesPage');
 
-        $records_total = Employee::getListCount();
+        $records_total = Employee::getListCount($match = null);
         $employeesPageSplitter = new PageSplitter($records_total, $employees_records_per_page = 2, $employees_page_selected, $match = null);
 
         $employees_pages = $employeesPageSplitter->getPages();

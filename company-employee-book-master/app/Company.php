@@ -62,7 +62,7 @@ class Company
     }
 
     public static function getListCount($match){
-        return DB::table('companies')->select('id')->where('name', 'like', '%'.$match.'%')->count();
+        return DB::table('companies')->where('companies.name', 'like', '%'.$match.'%')->count();
     }
 
     public function getListEmployeesOfCompany($company_id)
