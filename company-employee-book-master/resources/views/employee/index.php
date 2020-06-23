@@ -35,7 +35,7 @@ include(app_path().'/../resources/views/includes/header.php');
 			$row++;
             echo'
                 <tr>
-                    <td scope="row">'.($row + $page * $results_per_page - $results_per_page).'</td>
+                    <td scope="row">'.($row + $page * $employees_records_per_page - $employees_records_per_page).'</td>
                     <td>'.$employee['names'].'</td>
                     <td>'.$employee['companies_count'].'</td>
                         <!-- Trigger the modal with a button -->

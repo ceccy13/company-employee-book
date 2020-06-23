@@ -44,7 +44,7 @@ class Employee
         ]);
     }
 
-    public function getList($match = null, $pageFrom = null, $pageTo = null)
+    public static function getList($match = null, $pageFrom = null, $pageTo = null)
     {    
         return DB::table('employees')
             ->leftJoin('companies_employees', 'employees.id', '=', 'companies_employees.employee_id')
@@ -55,6 +55,10 @@ class Employee
            	->get()
             ->skip($pageFrom)
             ->take($pageTo);
+    }
+
+    public static function getListCount($match){
+        return DB::table('employees')->select('id')->where('employees.name', 'like', '%'.$match.'%')->count();
     }
 
     public function getListCompaniesOfEmployee($employee_id)

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Company;
 use App\Converter;
-use App\DataSplitOnPage;
+use App\PageSplitter;
 
 class HomeController extends Controller
 {
@@ -21,33 +21,34 @@ class HomeController extends Controller
 		
         $match = $request->input('search');
 
-        $companies_selected_page = $request->get('companiesPage');
-        $employees_selected_page = $request->get('employeesPage');
+        $companies_page_selected = $request->get('companiesPage');
+        $employees_page_selected = $request->get('employeesPage');
 
-        $companiesSplitPages = new DataSplitOnPage('companies', $results_per_page = 2, $companies_selected_page, $match);
-		$companies_results_per_page = $companiesSplitPages->getResultPerPage();
-        $companiesSelectedPage = $companiesSplitPages->getSelectedPageInterval();		
-		$companies_pages = $companiesSplitPages->get();
+        $records_total = Company::getListCount($match);
+        $companiesPageSplitter = new PageSplitter($records_total, $companies_records_per_page = 2, $companies_page_selected, $match);
 
-        $employeesSplitPages = new DataSplitOnPage('employees', $results_per_page = 2, $employees_selected_page, $match);
-		$employees_results_per_page = $employeesSplitPages->getResultPerPage();
-        $employeesSelectedPage = $employeesSplitPages->getSelectedPageInterval();	
-		$employees_pages = $employeesSplitPages->get();
+		$companies_pages = $companiesPageSplitter->getPages();
+        $companiesPageFrom = $companiesPageSplitter->getPageFrom();
+        $companiesPageTo = $companiesPageSplitter->getPageTo();
+        $companies_records_per_page = $companiesPageSplitter->getNumberRecordsPerPage();
 
-        $company = new Company();
-        $companies = $company->getList($match, $companiesSelectedPage['from'], $companiesSelectedPage['to']);
+        $records_total = Employee::getListCount($match);
+        $employeesPageSplitter = new PageSplitter($records_total, $employees_records_per_page = 2, $employees_page_selected, $match);
+
+		$employees_pages = $employeesPageSplitter->getPages();
+        $employeesPageFrom = $employeesPageSplitter->getPageFrom();
+        $employeesPageTo = $employeesPageSplitter->getPageTo();
+        $employees_records_per_page = $employeesPageSplitter->getNumberRecordsPerPage();
+
+        $companies = Company::getList($match, $companiesPageFrom, $companiesPageTo);
         $companies = Converter::convertObjToArr($companies);
 
-        $employee = new Employee();
-        $employees = $employee->getList($match, $employeesSelectedPage['from'], $employeesSelectedPage['to']);
+        $employees = Employee::getList($match, $employeesPageFrom, $employeesPageTo);
         $employees = Converter::convertObjToArr($employees);
-//echo '<pre>';
-//echo print_r($employees_pages, true);
-//echo '<pre>';
 
         return view('home', array('$match' => $match, 'companies' => $companies, 'employees' => $employees))
-				->with('companies_pages', $companies_pages)->with('companies_results_per_page', $companies_results_per_page)
-				->with('employees_pages', $employees_pages)->with('employees_results_per_page', $employees_results_per_page);
+				->with('companies_pages', $companies_pages)->with('companies_records_per_page', $companies_records_per_page)
+				->with('employees_pages', $employees_pages)->with('employees_records_per_page', $employees_records_per_page);
     }
 
 }

@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 use App\Company_Employee;
 use App\Employee;
 use App\Converter;
-use App\DataSplitOnPage;
+use App\PageSplitter;
 
 class CompanyController extends Controller
 {
@@ -26,19 +26,21 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies_selected_page = $request->get('companiesPage');
+        $companies_page_selected = $request->get('companiesPage');
 
-        $companiesSplitPages = new DataSplitOnPage('companies', $results_per_page = 2, $companies_selected_page, $match = null);
-        $companies_pages = $companiesSplitPages->get();
-        $companiesSelectedPageInterval = $companiesSplitPages->getSelectedPageInterval();
-		$results_per_page = $companiesSplitPages->getResultPerPage();		
+        $records_total = Company::getListCount();
+        $companiesPageSplitter = new PageSplitter($records_total, $companies_records_per_page = 2, $companies_page_selected, $match = null);
 
-        $company = new Company();
-        $companies = $company->getList($words = null, $companiesSelectedPageInterval['from'], $companiesSelectedPageInterval['to']);
+        $companies_pages = $companiesPageSplitter->getPages();
+        $companiesPageFrom = $companiesPageSplitter->getPageFrom();
+        $companiesPageTo = $companiesPageSplitter->getPageTo();
+        $companies_records_per_page = $companiesPageSplitter->getNumberRecordsPerPage();
+
+        $companies = Company::getList($match, $companiesPageFrom, $companiesPageTo);
         $companies = Converter::convertObjToArr($companies);
 
         return view('company.index',array('companies' => $companies))
-					->with('companies_pages', $companies_pages)->with('results_per_page', $results_per_page);
+					->with('companies_pages', $companies_pages)->with('companies_records_per_page', $companies_records_per_page);
     }
 
     /**

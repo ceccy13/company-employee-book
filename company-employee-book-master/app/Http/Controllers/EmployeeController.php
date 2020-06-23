@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 use App\Company;
 use App\Company_Employee;
 use App\Converter;
-use App\DataSplitOnPage;
+use App\PageSplitter;
 
 class EmployeeController extends Controller
 {
@@ -26,19 +26,21 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        $employees_selected_page = $request->get('employeesPage');
+        $employees_page_selected = $request->get('employeesPage');
 
-        $employeesSplitPages = new DataSplitOnPage('employees', $results_per_page = 2, $employees_selected_page, $match = null);
-        $employees_pages = $employeesSplitPages->get();
-        $employeesSelectedPageInterval = $employeesSplitPages->getSelectedPageInterval();		
-		$results_per_page = $employeesSplitPages->getResultPerPage();		
+        $records_total = Employee::getListCount();
+        $employeesPageSplitter = new PageSplitter($records_total, $employees_records_per_page = 2, $employees_page_selected, $match = null);
 
-        $employee = new Employee();
-        $employees = $employee->getList($words = null, $employeesSelectedPageInterval['from'], $employeesSelectedPageInterval['to']);
+        $employees_pages = $employeesPageSplitter->getPages();
+        $employeesPageFrom = $employeesPageSplitter->getPageFrom();
+        $employeesPageTo = $employeesPageSplitter->getPageTo();
+        $employees_records_per_page = $employeesPageSplitter->getNumberRecordsPerPage();
+
+        $employees = Employee::getList($match, $employeesPageFrom, $employeesPageTo);
         $employees = Converter::convertObjToArr($employees);
 
         return view('employee.index',array('employees' => $employees))
-					->with('employees_pages', $employees_pages)->with('results_per_page', $results_per_page);
+					->with('employees_pages', $employees_pages)->with('employees_records_per_page', $employees_records_per_page);
     }
 
     /**
