@@ -26,6 +26,7 @@ class Company
             $value = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
             //Преобразува само първата буква от низа на главна (за кирилица и латиница)
             $value = mb_strtoupper(mb_substr($value, 0, 1)).mb_substr($value, 1);
+			$value = htmlspecialchars($value);
 
             $request[$field] = $value;
         }
