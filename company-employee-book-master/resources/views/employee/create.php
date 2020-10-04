@@ -115,11 +115,6 @@ include(app_path().'/../resources/views/includes/header.php');
                 <div class="form-group col-md-6">
                     <div class="form-group">
                         <label for="companies">Companies List</label>
-						<?php
-						echo 'testsssssssssssss';
-						//echo print_r(old('companies[]'), true); 
-						echo print_r(old('companies'), true); 
-						?>
                         <select name="companies[]" multiple class="form-control mc-textarea-size" id="companies">
                             <?php
                             foreach($companies as $company){
